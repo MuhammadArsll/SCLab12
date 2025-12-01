@@ -1,25 +1,10 @@
 package expressivo;
 
-/**
- * Immutable addition expression.
- *
- * Rep invariant:
- *   - left != null
- *   - right != null
- *
- * Abstraction Function:
- *   AF(left, right) = (left + right)
- *
- * Safety from rep exposure:
- *   - fields are private and final
- *   - left and right are immutable Expressions
- */
 public final class PlusExpr implements Expression {
 
     private final Expression left;
     private final Expression right;
 
-    /** Constructor is package-private; use Expression.plus(). */
     PlusExpr(Expression left, Expression right) {
         this.left = left;
         this.right = right;
@@ -33,7 +18,8 @@ public final class PlusExpr implements Expression {
 
     @Override
     public String toString() {
-        return left.toString() + " + " + right.toString();
+        // Parenthesize binary addition to preserve structure
+        return "(" + left.toString() + " + " + right.toString() + ")";
     }
 
     @Override

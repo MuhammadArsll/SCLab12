@@ -1,21 +1,10 @@
 package expressivo;
 
-/**
- * Immutable multiplication expression.
- *
- * Rep invariant:
- *   - left != null
- *   - right != null
- *
- * Abstraction Function:
- *   AF(left, right) = (left * right)
- */
 public final class TimesExpr implements Expression {
 
     private final Expression left;
     private final Expression right;
 
-    /** Constructor is package-private; use Expression.times(). */
     TimesExpr(Expression left, Expression right) {
         this.left = left;
         this.right = right;
@@ -29,7 +18,8 @@ public final class TimesExpr implements Expression {
 
     @Override
     public String toString() {
-        return left.toString() + " * " + right.toString();
+        // Parenthesize binary multiplication to preserve structure
+        return "(" + left.toString() + " * " + right.toString() + ")";
     }
 
     @Override
