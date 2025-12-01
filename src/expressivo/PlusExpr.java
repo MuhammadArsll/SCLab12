@@ -1,22 +1,26 @@
 package expressivo;
 
 /**
- * Immutable multiplication expression.
+ * Immutable addition expression.
  *
  * Rep invariant:
  *   - left != null
  *   - right != null
  *
  * Abstraction Function:
- *   AF(left, right) = (left * right)
+ *   AF(left, right) = (left + right)
+ *
+ * Safety from rep exposure:
+ *   - fields are private and final
+ *   - left and right are immutable Expressions
  */
-public final class TimesExpr implements Expression {
+public final class PlusExpr implements Expression {
 
     private final Expression left;
     private final Expression right;
 
-    /** Constructor is package-private; use Expression.times(). */
-    TimesExpr(Expression left, Expression right) {
+    /** Constructor is package-private; use Expression.plus(). */
+    PlusExpr(Expression left, Expression right) {
         this.left = left;
         this.right = right;
         checkRep();
@@ -29,18 +33,18 @@ public final class TimesExpr implements Expression {
 
     @Override
     public String toString() {
-        return left.toString() + " * " + right.toString();
+        return left.toString() + " + " + right.toString();
     }
 
     @Override
     public boolean equals(Object o) {
-        if (!(o instanceof TimesExpr)) return false;
-        TimesExpr other = (TimesExpr) o;
+        if (!(o instanceof PlusExpr)) return false;
+        PlusExpr other = (PlusExpr) o;
         return left.equals(other.left) && right.equals(other.right);
     }
 
     @Override
     public int hashCode() {
-        return 37 * left.hashCode() + right.hashCode();
+        return 31 * left.hashCode() + right.hashCode();
     }
 }
